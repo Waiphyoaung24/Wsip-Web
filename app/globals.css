@@ -20,9 +20,13 @@
   --font-mono: var(--font-geist-mono);
 }
 
+html {
+  height: 100%;
+}
+
 body {
   /* Using your specified colors #ef552c and #34445e and variations of them. */
-  background: linear-gradient(-45deg, #ef552c, #34445e, #3c5876, #f37d5c);
+  background: linear-gradient(-45deg, #ef552c, #161f2a, #18212d, #f37d5c);
   /* #ef552c is your first color (a bright orange)
     #34445e is your second color (a grayish-blue)
     #3c5876 is a slightly lighter/more saturated blue variation of #34445e
@@ -32,7 +36,7 @@ body {
   animation: gradient 15s ease infinite;
   height: 100vh;
   color: var(--foreground);
-  cursor: default;
+  cursor: none;
 }
 
 @keyframes gradient {
@@ -45,4 +49,16 @@ body {
   100% {
     background-position: 0% 50%;
   }
+}
+
+canvas {
+  display: block;
+}
+
+#c {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  background: transparent;
 }

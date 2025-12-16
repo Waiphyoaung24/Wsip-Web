@@ -1,4 +1,3 @@
-import { FireCursor } from "@/components/cursor/FireCursor";
 import { MainNav } from "@/components/layout/MainNav";
 import { OverboardSection } from "@/components/OverboardSection";
 import { SsgoiTransition } from "@ssgoi/react";
@@ -9,8 +8,7 @@ export default function Home() {
     
     <SsgoiTransition id="/">
       <OverboardSection />
-      <div className="relative flex min-h-screen items-start justify-center ">
-      <FireCursor />
+      <div className="relative flex min-h-screen items-start justify-center font-sans">
         <main className="relative z-10 flex w-full max-w-5xl flex-col gap-8 px-4 pt-4 pb-6 sm:px-6 sm:pt-6 sm:pb-8">
           <header className="flex h-16 items-center justify-between sm:h-20">
             <div className="flex items-center gap-2">

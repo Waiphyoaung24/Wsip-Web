@@ -1,34 +1,43 @@
 "use client";
 
 import { gsap } from "gsap";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export function OverboardSection() {
-  const [showOverlay, setShowOverlay] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    // Load the font
-    const link = document.createElement("link");
-    link.href = "https://fonts.googleapis.com/css?family=Advent+Pro:100";
-    link.rel = "stylesheet";
-    document.head.appendChild(link);
-
     // Check if user has already visited
     const hasVisited = localStorage.getItem("hasVisitedOverboard");
     
     // Only show overlay if user hasn't visited before
-    if (!hasVisited) {
-      setShowOverlay(true);
+    if (hasVisited) {
+      setShowOverlay(false);
+      return;
+    }
+
+    // Wait for page to fully load
+    const handleLoad = () => {
+      setIsLoaded(true);
+    };
+
+    // Check if page is already loaded
+    if (document.readyState === "complete") {
+      setIsLoaded(true);
+    } else {
+      window.addEventListener("load", handleLoad);
     }
 
     return () => {
-      if (document.head.contains(link)) {
-        document.head.removeChild(link);
-      }
+      window.removeEventListener("load", handleLoad);
     };
   }, []);
 
-  const handleEnter = () => {
+  const handleLogoClick = () => {
+    if (!isLoaded) return; // Don't allow click until page is loaded
+    
     // Save to localStorage that user has visited
     localStorage.setItem("hasVisitedOverboard", "true");
     
@@ -51,22 +60,24 @@ export function OverboardSection() {
   return (
     <div
       id="overboard-section"
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-[url('http://upload.wikimedia.org/wikipedia/commons/d/dd/Muybridge_race_horse_animated.gif')] bg-cover bg-center bg-no-repeat"
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-gradient-to-br from-[#ef552c] via-[#161f2a] to-[#18212d]"
       style={{
         backgroundAttachment: "fixed",
       }}
     >
-      <h1
-        onClick={handleEnter}
-        className="cursor-pointer text-5xl text-[rgba(197, 48, 48, 0.3)] transition-opacity hover:opacity-70 sm:text-6xl md:text-7xl"
-        style={{
-          fontFamily: "'Advent Pro', sans-serif",
-          fontSize: "3em",
-          margin: "0.2em 0.5em",
-        }}
+      <div 
+        onClick={handleLogoClick}
+        className={`flex flex-col items-center justify-center transition-opacity ${isLoaded ? 'cursor-pointer hover:opacity-80' : 'cursor-wait'}`}
       >
-        Enter
-      </h1>
+        <Image
+          src="/imgs/logo.png"
+          alt="Wsip logo"
+          width={400}
+          height={120}
+          priority
+          className="animate-pulse"
+        />
+      </div>
     </div>
   );
 }
