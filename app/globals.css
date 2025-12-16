@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Alwyn";
+  src: url("/fonts/Alwyn Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 *,
 *::before,
 *::after {
@@ -16,27 +24,45 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "Alwyn", sans-serif;
+  --font-mono: "Alwyn", sans-serif;
+}
+
+* {
+  font-family: "Alwyn", sans-serif;
 }
 
 html {
   height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  /* Gradient background colors */
+  background: linear-gradient(-45deg, #ef552c, #161f2a, #18212d, #f37d5c);
+  background-size: 400% 400%;
+  background: #161f2a;
+  animation: gradient 15s ease infinite;
+  background-attachment: fixed;
 }
 
 body {
-  /* Using your specified colors #ef552c and #34445e and variations of them. */
+  /* Gradient background with color codes */
+  /* Color codes: #ef552c (orange), #161f2a (dark blue), #18212d (darker blue), #f37d5c (light orange) */
+  font-family: "Alwyn", sans-serif;
   background: linear-gradient(-45deg, #ef552c, #161f2a, #18212d, #f37d5c);
-  /* #ef552c is your first color (a bright orange)
-    #34445e is your second color (a grayish-blue)
-    #3c5876 is a slightly lighter/more saturated blue variation of #34445e
-    #f37d5c is a slightly lighter/less intense orange variation of #ef552c
-  */
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
+  background-attachment: fixed;
+  min-height: 100vh;
   height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
   color: var(--foreground);
   cursor: none;
+  overflow-x: hidden;
+  position: relative;
 }
 
 @keyframes gradient {
@@ -61,4 +87,20 @@ canvas {
   pointer-events: none;
   z-index: 50;
   background: transparent;
+}
+
+.panel.red {
+  background: red;
+}
+
+.panel.blue {
+  background: blue;
+}
+
+.panel.green {
+  background: green;
+}
+
+.panel.orange {
+  background: orange;
 }
