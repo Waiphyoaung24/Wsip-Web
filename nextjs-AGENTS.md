@@ -1,4 +1,5 @@
-# AGENTS.md - Next.js Project Contributor Guide
+Next.js logo
+Skeleton# AGENTS.md - Next.js Project Contributor Guide
 
 Welcome to this Next.js project repository. This file contains the main points for new contributors and AI assistants working with Next.js/TypeScript projects.
 
