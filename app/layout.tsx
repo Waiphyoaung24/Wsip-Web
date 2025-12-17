@@ -1,4 +1,5 @@
 import { CursorCanvas } from "@/components/CursorCanvas";
+import { ScrollSmootherProvider } from "@/components/ScrollSmootherProvider";
 import type { Metadata } from "next";
 import "./globals.css";
 import { SsgoiProvider } from "./ssgoi-provider";
@@ -17,7 +18,9 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         <CursorCanvas />
-        <SsgoiProvider>{children}</SsgoiProvider>
+        <ScrollSmootherProvider>
+          <SsgoiProvider>{children}</SsgoiProvider>
+        </ScrollSmootherProvider>
       </body>
     </html>
   );

@@ -26,9 +26,28 @@
   --color-foreground: var(--foreground);
   --font-sans: "Alwyn", sans-serif;
   --font-mono: "Alwyn", sans-serif;
+  --font-serif: "Alwyn", sans-serif;
 }
 
 * {
+  font-family: "Alwyn", sans-serif;
+}
+
+html,
+body,
+div,
+span,
+h1, h2, h3, h4, h5, h6,
+p,
+a,
+button,
+input,
+textarea,
+select,
+label,
+li,
+td,
+th {
   font-family: "Alwyn", sans-serif;
 }
 
@@ -44,6 +63,7 @@ html {
   background: #161f2a;
   animation: gradient 15s ease infinite;
   background-attachment: fixed;
+  font-family: "Alwyn", sans-serif;
 }
 
 body {
@@ -302,4 +322,442 @@ canvas {
 
 .logo-marquee-toggle--vertical .logo-marquee-toggle-icon {
   transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+/* Highlight Text Effect */
+.highlight-text {
+  display: inline-block;
+  color: #e0e0e0;
+  transition: color 250ms, text-shadow 250ms;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 0;
+}
+
+.highlight-text::after {
+  position: absolute;
+  z-index: -1;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  content: '';
+  width: 100%;
+  height: 3px;
+  background-color: #e0e0e0;
+  transition: all 250ms;
+}
+
+.highlight-text:hover {
+  color: #0a0a0a;
+  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.highlight-text:hover::after {
+  height: 105%;
+  width: 105%;
+}
+
+/* Welcome Section Infinite Gallery */
+.welcome-gallery {
+  position: relative;
+  display: flex;
+  width: min(34rem, 60vw);
+  height: min(82vh, 44rem); /* maximise vertical presence but keep a bit of breathing room */
+  overflow: hidden;
+  padding: 1.5rem 1.5rem;
+  background: transparent;
+  margin: 1.5rem 0;
+  border-radius: 0; /* flush edges for a bolder look */
+}
+
+.welcome-slider {
+  height: 100%;
+  width: 50%;
+  overflow: visible;
+}
+
+.welcome-slider + .welcome-slider {
+  margin-left: 0.5rem;
+}
+
+.welcome-slider-1 .welcome-img-wrap {
+  animation: welcome-translation 16s linear infinite;
+}
+
+.welcome-slider-2 .welcome-img-wrap {
+  animation: welcome-translation 16s linear infinite reverse;
+}
+
+.welcome-img-wrap {
+  overflow: hidden;
+  padding: 0.75rem;
+}
+
+.welcome-img-wrap img {
+  border-radius: 0.75rem;
+  max-width: 16rem;
+  max-height: 32rem;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@keyframes welcome-translation {
+  from {
+    transform: translateY(-320%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
+@media (max-width: 640px) {
+  .welcome-gallery {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    padding: 1rem 0;
+  }
+
+  .welcome-slider {
+    display: flex;
+    flex-direction: row;
+    width: max-content;
+    height: 16rem;
+    align-items: stretch;
+  }
+
+  .welcome-img-wrap {
+    padding: 0.5rem;
+  }
+
+  .welcome-img-wrap img {
+    width: 70vw;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+  }
+
+  /* Disable vertical keyframe animation on mobile; allow manual horizontal scroll */
+  .welcome-slider-1 .welcome-img-wrap,
+  .welcome-slider-2 .welcome-img-wrap {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .welcome-slider-1 .welcome-img-wrap,
+  .welcome-slider-2 .welcome-img-wrap {
+    animation: none;
+  }
+}
+
+/* Sculpture Flow Section */
+.sculpture-flow-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
+  padding-top: 40px;
+}
+
+.sculpture-flow-marquee {
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(224, 224, 224, 0.04);
+}
+
+.sculpture-flow-marquee--back {
+  top: 20%;
+  z-index: 1;
+}
+
+.sculpture-flow-marquee--front {
+  bottom: 20%;
+  z-index: 3;
+  color: rgba(224, 224, 224, 0.12);
+}
+
+.sculpture-flow-track {
+  display: inline-flex;
+  width: max-content;
+  animation: sculpture-flow-scroll 30s linear infinite;
+}
+
+.sculpture-flow-content {
+  display: flex;
+}
+
+.sculpture-flow-content span {
+  margin-right: 1.5rem;
+}
+
+@keyframes sculpture-flow-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.sculpture-flow-center-image {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(520px, 70vw);
+  filter: drop-shadow(0 25px 60px rgba(0, 0, 0, 0.7));
+  z-index: 2;
+}
+
+.sculpture-flow-content-section {
+  margin-top: clamp(2.5rem, 6vw, 3.5rem);
+  display: flex;
+  justify-content: center;
+  padding: 0 16px 24px;
+}
+
+.sculpture-flow-content-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: clamp(2rem, 5vw, 5rem);
+  width: 100%;
+  max-width: 1200px;
+}
+
+.sculpture-flow-block {
+  color: #f9fafb;
+  background: rgba(10, 10, 10, 0.9);
+  padding: 16px 20px 18px;
+  border-radius: 4px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
+  max-width: 250px;
+}
+
+.sculpture-flow-block h3 {
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+  color: #facc15;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.sculpture-flow-block p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  font-weight: 300;
+  opacity: 0.95;
+}
+
+@media (max-width: 768px) {
+  .sculpture-flow-marquee {
+    font-size: clamp(2rem, 12vw, 3rem);
+  }
+
+  .sculpture-flow-center-image {
+    width: min(420px, 80vw);
+  }
+
+  .sculpture-flow-content-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sculpture-flow-marquee {
+    font-size: clamp(1.75rem, 14vw, 2.75rem);
+  }
+
+  .sculpture-flow-center-image {
+    width: min(340px, 85vw);
+  }
+}
+
+/* Featured Projects Horizontal Scroll */
+.featured-section-pin {
+  min-height: 100vh;
+  height: 100vh;
+  background-color: #161f2a;
+  padding-top: 120px;
+  padding-bottom: 120px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 4;
+}
+
+.featured-section-pin * {
+  color: var(--foreground);
+}
+
+.section_pin {
+  height: 100vh;
+  padding: 120px clamp(3rem, 12vw, 8rem) 120px clamp(3rem, 12vw, 8rem);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  will-change: transform;
+}
+
+.content_wrapper {
+  min-width: 777px;
+  padding: 0 clamp(1.5rem, 6vw, 4rem) 0 clamp(1.5rem, 6vw, 4rem);
+  flex-shrink: 0;
+}
+
+.content_wrapper h1 {
+  margin: 0;
+  font-family: "Alwyn", sans-serif;
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: 600;
+  font-style: normal;
+  line-height: 1.2;
+  color: var(--foreground);
+  letter-spacing: -0.02em;
+}
+
+.image_wrapper {
+  min-width: 60vw;
+  padding: 0 clamp(1.5rem, 6vw, 4rem) 0 clamp(1.5rem, 6vw, 4rem);
+  position: relative;
+  opacity: 0.7;
+  transition: opacity 0.3s cubic-bezier(0.51, 0.18, 0, 0.88);
+  flex-shrink: 0;
+}
+
+.image_wrapper.active {
+  opacity: 1;
+}
+
+.image_wrapper .image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+@media screen and (max-width: 1024px) {
+  .content_wrapper {
+    min-width: 500px;
+    padding: 0 clamp(1rem, 4vw, 2rem) 0 clamp(1rem, 4vw, 2rem);
+  }
+
+  .image_wrapper {
+    min-width: 70vw;
+    padding: 0 clamp(1rem, 4vw, 2rem) 0 clamp(1rem, 4vw, 2rem);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .featured-section-pin {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .section_pin {
+    padding: 80px clamp(1.5rem, 6vw, 3rem) 80px clamp(1.5rem, 6vw, 3rem);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .content_wrapper {
+    min-width: 100%;
+    width: 100%;
+    padding: 0;
+  }
+
+  .content_wrapper h1 {
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+    margin-bottom: 2rem;
+  }
+
+  .image_wrapper {
+    min-width: 100%;
+    width: 100%;
+    padding: 0;
+  }
+}
+
+/* ScrollSmoother wrapper styles */
+#smooth-wrapper {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#smooth-content {
+  will-change: transform;
+}
+
+/* Ensure cursor canvas stays above ScrollSmoother */
+#c {
+  position: fixed !important;
+  z-index: 9999 !important;
+}
+
+/* Logo Motion Path Animation Styles */
+.motion-main {
+  position: relative;
+  height: 300vh;
+  z-index: 20;
+  isolation: isolate;
+}
+
+.motion-container {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+}
+
+.motion-box {
+  width: 100px;
+  height: 100px;
+  z-index: 40 !important;
+  border-radius: 10px;
+  background-color: transparent;
+  position: relative;
+  will-change: transform;
+  /* Add subtle glow to make logo more visible */
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4)) drop-shadow(0 0 16px rgba(255, 255, 255, 0.2));
+}
+
+.motion-marker {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+}
+
+.motion-spacer {
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 10;
 }

@@ -2,70 +2,56 @@
 
 import { LogoMarquee } from "@/components/LogoMarquee";
 import { OurServicesSection } from "@/components/OurServicesSection";
-import { gsap } from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect } from "react";
+import { SculptureFlowSection } from "@/components/SculptureFlowSection";
 
-// Register GSAP plugins
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-}
+// Layout tokens for consistent spacing across sections
+const SECTION_WRAPPER = "w-full px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16";
+const SECTION_CONTAINER = "min-h-screen flex items-start justify-center";
+const SECTION_CONTAINER_WITHOUT_MIN_HEIGHT = "flex items-start justify-center";
 
-export function ScrollSections() {
-  useEffect(() => {
-    const sections = gsap.utils.toArray<HTMLElement>(".panel");
+// Layout tokens for the "Who We Are" section
+const WHO_TITLE_CLASSES =
+  "text-white text-center text-2xl sm:text-3xl md:text-[38px] font-light pt-8 sm:pt-[45px] pb-0 mb-4 sm:mb-6 md:mb-8 lg:mb-10";
+const WHO_SUBTITLE_CONTAINER_CLASSES =
+  "flex items-center justify-center min-h-[200px] sm:min-h-[250px] md:min-h-[300px] mb-8 sm:mb-12 md:mb-16 lg:mb-20 px-4 sm:px-6 md:px-8";
+const WHO_SUBTITLE_TEXT_CLASSES =
+  "text-white text-center text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl max-w-4xl leading-relaxed font-light";
+const WHO_SCULPTURE_MARGIN_CLASSES =
+  "mt-6 sm:mt-8 md:mt-10 lg:mt-12";
 
-    function goToSection(i: number) {
-      gsap.to(window, {
-        scrollTo: {
-          y: i * window.innerHeight,
-          autoKill: false,
-        },
-        duration: 0.85,
-        ease: "power3.inOut",
-      });
-    }
-
-    ScrollTrigger.defaults({
-      // markers: true
-    });
-
-    sections.forEach((eachPanel, i) => {
-      ScrollTrigger.create({
-        trigger: eachPanel,
-        onEnter: () => goToSection(i),
-      });
-
-      ScrollTrigger.create({
-        trigger: eachPanel,
-        start: "bottom bottom",
-        onEnterBack: () => goToSection(i),
-      });
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
-
+export default function HeroSections() {
   return (
     <>
-      <section className="min-h-screen flex items-center justify-center panel">
-        <OurServicesSection />
+      <section className={SECTION_CONTAINER}>
+        <div className={SECTION_WRAPPER}>
+          <OurServicesSection />
+        </div>
       </section>
-      <section className="min-h-screen flex items-center justify-center panel px-4 sm:px-6 md:px-8">
-        <LogoMarquee />
+
+      <section className={SECTION_CONTAINER_WITHOUT_MIN_HEIGHT}>
+        <div className={SECTION_WRAPPER}>
+          <LogoMarquee />
+        </div>
       </section>
-      <section className="min-h-screen flex items-center justify-center panel px-4 sm:px-6 md:px-8">
-        <p className="text-white text-base sm:text-lg md:text-xl lg:text-2xl text-center max-w-4xl leading-relaxed">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
-        </p>
+
+      <div className="h-20"></div>
+      <section className={SECTION_CONTAINER}>
+        <div className={SECTION_WRAPPER}>
+          <h1 className={WHO_TITLE_CLASSES}>Who We Are</h1>
+          <div className={WHO_SUBTITLE_CONTAINER_CLASSES}>
+            <p className={WHO_SUBTITLE_TEXT_CLASSES}>
+              WISP Studio is a Bangkok-based creative collective operating at
+              the intersection of strategic brand design and innovative visual
+              technology.
+            </p>
+          </div>
+          <div className="h-50"></div>
+          <div className={WHO_SCULPTURE_MARGIN_CLASSES}>
+            <SculptureFlowSection />
+          </div>
+        </div>
       </section>
-      <section className="min-h-screen flex items-center justify-center panel px-4 sm:px-6 md:px-8">
-        <p className="text-white text-lg sm:text-xl md:text-2xl text-center max-w-4xl">This is page 4</p>
-      </section>
+
     </>
   );
 }
-

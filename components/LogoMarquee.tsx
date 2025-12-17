@@ -34,8 +34,8 @@ export function LogoMarquee() {
           {/* Gooey Transitions Section */}
           <div className="gooey-transitions-container mb-8 sm:mb-12 md:mb-16 lg:mb-20">
           <div className="gooey-transitions-wrapper">
-            <h1 className="gooey-text">Works</h1>
-            <h1 className="gooey-text">Projects</h1>
+            <h1 className="gooey-text"> Trusted by</h1>
+            <h1 className="gooey-text"> Companies</h1>
           </div>
         </div>
     

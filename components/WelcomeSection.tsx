@@ -1,6 +1,51 @@
+ "use client";
+
 import { AnimatedText } from "@/components/AnimatedText";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 
 export function WelcomeSection() {
+  const galleryRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!galleryRef.current) return;
+
+    const mm = gsap.matchMedia();
+
+    // Desktop / tablet only: keep existing vertical infinite scroll
+    mm.add("(min-width: 768px)", () => {
+      const duration = 18;
+
+      gsap.to(".welcome-slider-1 .welcome-img-wrap", {
+        yPercent: -320,
+        repeat: -1,
+        ease: "none",
+        duration,
+        stagger: {
+          each: duration / 5,
+          repeat: -1,
+        },
+      });
+
+      gsap.to(".welcome-slider-2 .welcome-img-wrap", {
+        yPercent: 320,
+        repeat: -1,
+        ease: "none",
+        duration,
+        stagger: {
+          each: duration / 5,
+          repeat: -1,
+        },
+      });
+    });
+
+    // No GSAP animation for mobile – handled via CSS horizontal scroll
+
+    return () => {
+      mm.revert();
+    };
+  }, []);
+
   return (
     <section className="mt-4 sm:mt-6 flex min-h-[calc(100vh-6rem)] sm:min-h-[calc(100vh-8rem)] items-center">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 w-full items-center">
@@ -13,11 +58,83 @@ export function WelcomeSection() {
           </AnimatedText>
         </div>
         <div className="flex items-center justify-center order-1 md:order-2">
-          <img
-            src="http://upload.wikimedia.org/wikipedia/commons/d/dd/Muybridge_race_horse_animated.gif"
-            alt="Animated gif"
-            className="w-full max-w-xs sm:max-w-sm md:max-w-md h-auto"
-          />
+          <div ref={galleryRef} className="welcome-gallery" aria-hidden="true">
+            <div className="welcome-slider welcome-slider-1">
+              <div className="welcome-img-wrap">
+                <img
+                  src="https://picsum.photos/seed/wisp-1/600/900"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+              <div className="welcome-img-wrap">
+                <img
+                  src="https://picsum.photos/seed/wisp-2/600/900"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+              <div className="welcome-img-wrap">
+                <img
+                  src="https://picsum.photos/seed/wisp-3/600/900"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+              <div className="welcome-img-wrap">
+                <img
+                  src="https://picsum.photos/seed/wisp-4/600/900"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+              <div className="welcome-img-wrap">
+                <img
+                  src="https://picsum.photos/seed/wisp-5/600/900"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            <div className="welcome-slider welcome-slider-2">
+              <div className="welcome-img-wrap">
+                <img
+                  src="https://picsum.photos/seed/wisp-6/600/900"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+              <div className="welcome-img-wrap">
+                <img
+                  src="https://picsum.photos/seed/wisp-7/600/900"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+              <div className="welcome-img-wrap">
+                <img
+                  src="https://picsum.photos/seed/wisp-8/600/900"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+              <div className="welcome-img-wrap">
+                <img
+                  src="https://picsum.photos/seed/wisp-9/600/900"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+              <div className="welcome-img-wrap">
+                <img
+                  src="https://picsum.photos/seed/wisp-10/600/900"
+                  alt=""
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

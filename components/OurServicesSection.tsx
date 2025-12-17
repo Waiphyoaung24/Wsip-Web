@@ -14,73 +14,74 @@ interface Service {
   name: string;
   title: string;
   description: string;
+  expandedContent?: string;
   icon?: string;
 }
 
 const services: Service[] = [
   {
-    id: "av",
-    name: "Antivirus",
-    title: "Antivirus",
+    id: "branding",
+    name: "Branding",
+    title: "Branding",
     description:
-      "Effectively catches all viruses. Our Antivirus includes Behavioural Detection, which spots new viruses because of the actions they take on your computer and stops them before they can do damage. Together with Signature-based Detection, which identifies the 'signatures' of known malware, you gain a multi-layered defence system for your PC that's virtually impenetrable.\n\nTop detection rates of viruses and malware have been proven by independent labs.",
-  },
+      "We craft compelling brand identities that resonate with your audience and differentiate you in the market. Our strategic approach combines market research, creative vision, and storytelling to build brands that leave lasting impressions.\n\nFrom logo design to brand guidelines, we create cohesive visual systems that communicate your values and connect with customers on an emotional level.",
+    },
   {
-    id: "firewall",
-    name: "Firewall",
-    title: "Firewall",
+    id: "design",
+    name: "Design",
+    title: "Design",
     description:
-      "Protect your computer from unwanted hackers and identity thieves with this first line of defense. The firewall protects you against network attacks and prevents cyber crooks from entering your system.",
-  },
+      "We transform ideas into visually stunning designs that captivate and engage. Our design team specializes in creating beautiful, functional, and user-centered solutions across print and digital mediums.\n\nWhether it's graphic design, UI/UX design, or creative direction, we bring creativity and strategic thinking to every project.",
+   },
   {
-    id: "backup",
-    name: "Backup",
-    title: "Backup",
+    id: "webdev",
+    name: "Web Development",
+    title: "Web Development",
     description:
-      "We've included 5GB of FREE online storage so you can keep your important data, photos, music and more safe. You can choose what you want to back up and how often, or just set the feature to auto backup. You can even back up content directly from folders with one click. And here's more: your back-up data is easily accessible whenever you want to view it or restore it to another computer or even your smart phone.",
-  },
+      "We build modern, responsive websites and web applications that combine beautiful design with powerful functionality. Our development team creates fast, secure, and scalable solutions using cutting-edge technologies.\n\nFrom simple landing pages to complex web applications, we deliver digital experiences that drive results and exceed expectations.",
+    },
   {
-    id: "vulnerabilities",
-    name: "Vulnerabilities",
-    title: "Vulnerabilities",
+    id: "tech",
+    name: "IT Solutions",
+    title: "IT Solutions",
     description:
-      "Checks your computer for out-dated software that hackers and viruses can exploit to gain access to your system, damage it or steal personal information. Once this software is flagged up it can then be removed.",
-  },
+      "We provide comprehensive IT technology solutions to help your business operate efficiently and scale effectively. Our technical expertise spans infrastructure, cloud services, automation, and system integration.\n\nWe help businesses leverage technology to streamline operations, improve productivity, and achieve their digital transformation goals.",
+   },
   {
-    id: "spamfilter",
-    name: "Spamfilter",
-    title: "Spamfilter",
+    id: "strategy",
+    name: "Brand Strategy",
+    title: "Brand Strategy",
     description:
-      "Spamfilter. No spam. No scam. BullGuard Spamfilter keeps out junk mail and email scams, like phishing attempts, virus spreading and foreign language spam. You can also customize filters to block emails you don't want to receive.",
-  },
+      "We develop strategic brand positioning and marketing strategies that drive growth and build meaningful connections with your audience. Our data-driven approach ensures your brand strategy aligns with business objectives.\n\nThrough research, analysis, and creative thinking, we craft strategies that differentiate your brand and guide all marketing and communication efforts.",
+   },
   {
-    id: "smp",
-    name: "Social Media Protect",
-    title: "Social Media Protect",
+    id: "digital",
+    name: "Digital Design",
+    title: "Digital Design",
     description:
-      "BullGuard helps you to monitor your children's Facebook profiles, including private messages and photos. We flag all possible threats to your children's safety, and notify you each time we find inappropriate content and ill-intended strangers.",
-  },
+      "We create engaging digital experiences across websites, mobile apps, and digital platforms. Our digital design team combines aesthetic excellence with user experience best practices to create interfaces that users love.\n\nFrom wireframes to pixel-perfect designs, we ensure every digital touchpoint reflects your brand and serves your users effectively.",
+    },
   {
-    id: "tuneup",
-    name: "PC Tune-up",
-    title: "PC Tune-up",
+    id: "content",
+    name: "Content Creation",
+    title: "Content Creation",
     description:
-      "You'll never have to wait again to get your computer up and running. BullGuard's PC Tune Up removes unnecessary files and frees up memory so your computer runs faster.",
-  },
+      "We produce compelling content that tells your brand story and engages your audience. From copywriting to visual content, we create materials that resonate and drive action.\n\nOur content creation services span written content, visual assets, video production, and social media content that aligns with your brand voice and marketing goals.",
+   },
   {
-    id: "idp",
-    name: "Identity Protection",
-    title: "Identity Protection",
+    id: "consulting",
+    name: "Creative Consulting",
+    title: "Creative Consulting",
     description:
-      "BullGuard scans the entire web for your usernames, email and postal addresses, phone numbers, credit card numbers, and more. Whenever one of your registered details is made public online, we immediately alert you via email and SMS, and provide you with advice on what to do next.\n\nIdentity Protection is only available for US, UK, Canada, Denmark, Germany, France, Ireland and Netherlands residents.",
-  },
+      "We provide strategic creative consulting to help businesses make informed decisions about their brand, design, and digital presence. Our consultants bring years of experience and industry insights to guide your creative projects.\n\nFrom brand audits to creative direction, we help you navigate complex creative challenges and make decisions that align with your business goals.",
+    },
   {
-    id: "parental",
-    name: "Parental Control",
-    title: "Parental Control",
+    id: "innovation",
+    name: "Innovation Lab",
+    title: "Innovation Lab",
     description:
-      "Use BullGuard Parental Control to keep your children in check. You can block their access to suspicious websites, limit their time on the internet and monitor their activity. BullGuard helps you to protect them from being exposed to cyberbullying and inappropriate content.",
-  },
+      "We explore emerging technologies and creative possibilities to help businesses stay ahead of the curve. Our innovation lab experiments with new tools, techniques, and approaches to solve creative and technical challenges.\n\nFrom AI-powered design tools to immersive experiences, we help businesses explore what's next and identify opportunities for innovation in their brand and digital presence.",
+   },
 ];
 
 export function OurServicesSection() {
@@ -89,35 +90,43 @@ export function OurServicesSection() {
   const titleRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
-    // Animate title
+    // Animate title (from offset/transparent to visible), but keep it visible by default
     if (titleRef.current) {
-      gsap.from(titleRef.current, {
-        scrollTrigger: {
-          trigger: titleRef.current,
-          start: "top 85%",
-          end: "bottom 20%",
-          scrub: true,
-        },
-        opacity: 0,
-        y: 30,
-        duration: 1,
-      });
+      gsap.fromTo(
+        titleRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          scrollTrigger: {
+            trigger: titleRef.current,
+            start: "top 85%",
+            end: "bottom 20%",
+            scrub: true,
+          },
+        }
+      );
     }
 
-    // Animate subtitle with fade-in
+    // Animate subtitle with a slight delay, but keep it visible by default
     if (subtitleRef.current) {
-      gsap.from(subtitleRef.current, {
-        scrollTrigger: {
-          trigger: subtitleRef.current,
-          start: "top 85%",
-          end: "bottom 20%",
-          scrub: true,
-        },
-        opacity: 0,
-        y: 30,
-        duration: 1,
-        delay: 0.2,
-      });
+      gsap.fromTo(
+        subtitleRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          delay: 0.2,
+          scrollTrigger: {
+            trigger: subtitleRef.current,
+            start: "top 85%",
+            end: "bottom 20%",
+            scrub: true,
+          },
+        }
+      );
     }
 
     return () => {
@@ -126,113 +135,142 @@ export function OurServicesSection() {
   }, []);
 
   return (
-    <section className="relative w-full overflow-x-hidden min-h-screen">
-      <div className="relative w-full h-full px-4 sm:px-6 md:px-8 lg:pr-[229px]">
+    <section className="">
+      <div className="relative w-full h-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         {/* Title */}
-        <h1 
-          ref={titleRef}
-          className="text-white text-center text-2xl sm:text-3xl md:text-[38px] font-light pt-8 sm:pt-[45px] pb-0 mb-4 sm:mb-6 md:mb-8 lg:mb-10"
-        >
-          Our Services
-        </h1>
-
-        {/* Subtitle with Animation */}
-        <div className="flex items-center justify-center min-h-[200px] sm:min-h-[250px] md:min-h-[300px] mb-8 sm:mb-12 md:mb-16 lg:mb-20 px-4 sm:px-6 md:px-8">
-          <p 
-            ref={subtitleRef}
-            className="text-white text-center text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl max-w-4xl leading-relaxed font-light"
-          >
-            WISP Studio is a Bangkok-based creative collective operating at the intersection of strategic brand design and innovative visual technology.
-          </p>
-          
-        </div>
-
        
 
+       
+        <h1 ref={titleRef} className="text-white text-center text-2xl sm:text-3xl md:text-[38px] font-light pt-8 sm:pt-[45px] pb-0 mb-4 sm:mb-6 md:mb-8 lg:mb-10"
+        > What We Do</h1>
+
         {/* Main Content Container */}
-        <div className="relative w-full flex flex-col md:flex-row items-start justify-between min-h-[400px] md:min-h-[600px] lg:min-h-[809px]">
-         
+        <div className="relative w-full flex flex-col md:flex-row items-start min-h-[300px] md:min-h-[500px] lg:min-h-709px]">
           {/* Feature Content - Left Side */}
-          <div className="relative w-full md:w-[30%] min-h-[300px] sm:min-h-[400px] mt-8 sm:mt-12 md:mt-0 md:top-[188px] md:left-[95px] px-4 sm:px-6 md:px-0">
+          <div
+            className="relative w-full md:w-[35%] lg:w-[30%] min-h-[300px] sm:min-h-[400px] mt-8 sm:mt-12 md:mt-0 md:left-0 px-4 sm:px-6 md:px-0"
+            style={{
+              top: "clamp(250px, 10vh, 142px)",
+              marginLeft: "clamp(200px, 5vw, 80px)",
+            }}
+          >
+            {/* Default visible content when no tile is active */}
+            {!activeService && (
+              <div className="feature-content absolute inset-0 z-10">
+                <div className="text-white space-y-4 sm:space-y-5 md:space-y-6">
+                  <div>
+                    <h2 className="text-2xl sm:text-3xl md:text-[37px] lg:text-[42px] font-light mb-3 sm:mb-4 tracking-[0.02em]">
+                      Overall
+                    </h2>
+                    <div className="mb-4 sm:mb-5 md:mb-6">
+                      <span className="block w-full border-t border-white/30 h-[1px]" />
+                    </div>
+                  </div>
+                  <div className="space-y-4 sm:space-y-5 md:space-y-6 mt-2">
+                    <p className="text-sm sm:text-base md:text-[16px] lg:text-[17px] text-white/90 leading-relaxed sm:leading-[1.85] md:leading-[1.9] font-light">
+                      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                      when an unknown printer took a galley of type and scrambled it to make a type
+                      specimen book. It has survived not only five centuries, but also the leap into
+                      electronic typesetting, remaining essentially unchanged.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Animated service content when a service is active */}
             {services.map((service) => (
               <div
                 key={service.id}
                 className={`feature-content absolute inset-0 transition-opacity duration-100 ${
-                  activeService === service.id ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                  activeService === service.id ? "opacity-100 z-20" : "opacity-0 z-0 pointer-events-none"
                 }`}
               >
-                <div className="text-white">
-                  <h2
-                    className="text-2xl sm:text-3xl md:text-[37px] font-normal mb-2 sm:mb-[10px] pl-0 md:pl-[72px] transition-all duration-200"
-                    style={{
-                      marginLeft: activeService === service.id ? "0" : "-24px",
-                      opacity: activeService === service.id ? 1 : 0,
-                    }}
-                  >
-                    {service.title}
-                  </h2>
-                  <div
-                    className="mb-2 sm:mb-[10px] transition-all duration-300"
-                    style={{
-                      width: activeService === service.id ? "100%" : "0",
-                      opacity: activeService === service.id ? 1 : 0,
-                    }}
-                  >
-                    <span className="block w-full border-t border-white/40 h-px" />
+                <div className="text-white space-y-4 sm:space-y-5 md:space-y-6">
+                  <div>
+                    <h2 className="text-2xl sm:text-3xl md:text-[37px] lg:text-[42px] font-light mb-3 sm:mb-4 tracking-[0.02em]">
+                      {service.title}
+                    </h2>
+                    <div className="mb-4 sm:mb-5 md:mb-6">
+                      <span className="block w-full border-t border-white/30 h-[1px]" />
+                    </div>
                   </div>
-                  <p
-                    className="text-sm sm:text-base md:text-[15px] text-white leading-relaxed sm:leading-[1.8] pr-0 md:pr-[32px] pt-4 sm:pt-6 md:pt-[32px] transition-opacity duration-300"
-                    style={{
-                      opacity: activeService === service.id ? 1 : 0,
-                    }}
-                  >
-                    {service.description.split("\n\n").map((paragraph, idx) => (
-                      <span key={idx}>
-                        {paragraph}
-                        {idx < service.description.split("\n\n").length - 1 && (
-                          <>
-                            <br />
-                            <br />
-                          </>
-                        )}
-                      </span>
-                    ))}
-                    {service.id === "idp" && (
-                      <span className="italic opacity-50 text-[10px] sm:text-[11px] block mt-2">
-                        Identity Protection is only available for US, UK, Canada, Denmark, Germany, France, Ireland and Netherlands residents.
-                      </span>
+
+                  <div className="space-y-4 sm:space-y-5 md:space-y-6 mt-2">
+                    <div className="prose prose-invert max-w-none">
+                      <p className="text-sm sm:text-base md:text-[16px] lg:text-[17px] text-white/90 leading-relaxed sm:leading-[1.85] md:leading-[1.9] font-light">
+                        {service.description.split("\n\n").map((paragraph, idx) => (
+                          <span key={idx}>
+                            {paragraph}
+                            {idx < service.description.split("\n\n").length - 1 && (
+                              <>
+                                <br />
+                                <br />
+                              </>
+                            )}
+                          </span>
+                        ))}
+                      </p>
+                    </div>
+
+                    {service.expandedContent && (
+                      <div className="prose prose-invert max-w-none pt-2 sm:pt-3 md:pt-4 border-t border-white/10">
+                        <p className="text-sm sm:text-base md:text-[16px] lg:text-[17px] text-white/85 leading-relaxed sm:leading-[1.85] md:leading-[1.9] font-light">
+                          {service.expandedContent.split("\n\n").map((paragraph, idx) => (
+                            <span key={idx}>
+                              {paragraph}
+                              {idx < service.expandedContent!.split("\n\n").length - 1 && (
+                                <>
+                                  <br />
+                                  <br />
+                                </>
+                              )}
+                            </span>
+                          ))}
+                        </p>
+                      </div>
                     )}
-                  </p>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
 
           {/* Tiles Container - Right Side */}
+         
+         
           <div
             className="absolute right-0 hidden md:block"
             style={{
               width: "clamp(500px, 50vw, 700px)",
               height: "clamp(500px, 50vw, 700px)",
+              right: "clamp(40px, 5vw, 80px)",
               top: "clamp(100px, 10vh, 142px)",
-              right: "clamp(-60px, -5vw, -20px)",
               zIndex: 3,
-              transform: "scale(0.6) rotateX(0deg) rotateZ(6deg) rotateY(-5deg) skewX(-8deg) skewY(0deg)",
-              transformOrigin: "center center",
             }}
             onMouseLeave={() => setActiveService(null)}
           >
+             <h1 className="text-white font-sans leading-[1.4] max-w-[45rem] text-center text-base sm:text-lg md:text-lg lg:text-lg mb-4 sm:mb-6" style={{ wordSpacing: '1px', textShadow: '0px 1px 0px rgba(255, 255, 255, 0.1)' }}>
+              Hover to see our services below, <br></br>if you want to see more, click{' '}
+              <a href="/service" className="highlight-text inline-block text-white no-underline transition-all duration-[250ms] relative z-0 cursor-pointer" style={{ textShadow: '0px 1px 0px rgba(255, 255, 255, 0.1)' }}>
+                <span>here</span>
+              </a>
+            </h1>
             <div 
-              className="grid grid-cols-3 h-full w-full"
+              className="grid grid-cols-3 h-full w-full items-center justify-items-center"
               style={{
-                gap: "16px",
+                gap: "clamp(20px, 2.5vw, 32px)",
                 perspective: "1000px",
+                padding: "clamp(12px, 1.5vw, 24px)",
+                alignContent: "center",
+                justifyContent: "center",
               }}
             >
               {services.map((service) => (
                 <div
                   key={service.id}
-                  className={`service-tile relative cursor-pointer transition-all duration-300 ease-out ${
+                  className={`service-tile relative cursor-pointer transition-all duration-300 ease-out w-full h-full ${
                     activeService === service.id
                       ? "scale-[1.8] z-20 -translate-x-[70px]"
                       : activeService && activeService !== service.id
@@ -248,15 +286,7 @@ export function OurServicesSection() {
                   <div
                     className="w-full h-full bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center rounded-sm"
                     style={{
-                      backgroundImage: service.id === "av" ? "url(http://bullguard.com/marketingfiles/ext/umbracoLanding/demo/images/featureslist/avTile.jpg)" :
-                                   service.id === "firewall" ? "url(http://bullguard.com/marketingfiles/ext/umbracoLanding/demo/images/featureslist/firewallTile.jpg)" :
-                                   service.id === "backup" ? "url(http://bullguard.com/marketingfiles/ext/umbracoLanding/demo/images/featureslist/backupTile.jpg)" :
-                                   service.id === "vulnerabilities" ? "url(http://bullguard.com/marketingfiles/ext/umbracoLanding/demo/images/featureslist/vulnerableTile.jpg)" :
-                                   service.id === "spamfilter" ? "url(http://bullguard.com/marketingfiles/ext/umbracoLanding/demo/images/featureslist/spamfilterTile.jpg)" :
-                                   service.id === "smp" ? "url(http://bullguard.com/marketingfiles/ext/umbracoLanding/demo/images/featureslist/smpTile.jpg)" :
-                                   service.id === "tuneup" ? "url(http://bullguard.com/marketingfiles/ext/umbracoLanding/demo/images/featureslist/tuneupTile.jpg)" :
-                                   service.id === "idp" ? "url(http://bullguard.com/marketingfiles/ext/umbracoLanding/demo/images/featureslist/idpTile.jpg)" :
-                                   "url(http://bullguard.com/marketingfiles/ext/umbracoLanding/demo/images/featureslist/parentalTile.jpg)",
+                      backgroundImage: `linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.6) 100%)`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                       backgroundRepeat: "no-repeat",
@@ -270,7 +300,7 @@ export function OurServicesSection() {
           </div>
 
           {/* Mobile Tiles Grid */}
-          <div className="md:hidden w-full mt-8 mb-12 sm:mb-16 px-4">
+          <div className="md:hidden w-full mt-8 mb-4 sm:mb-16 px-4">
             <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-5 max-w-lg mx-auto">
               {services.map((service) => (
                 <div
@@ -288,15 +318,7 @@ export function OurServicesSection() {
                   <div
                     className="w-full h-full bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center rounded-lg"
                     style={{
-                      backgroundImage: service.id === "av" ? "url(http://bullguard.com/marketingfiles/ext/umbracoLanding/demo/images/featureslist/avTile.jpg)" :
-                                   service.id === "firewall" ? "url(http://bullguard.com/marketingfiles/ext/umbracoLanding/demo/images/featureslist/firewallTile.jpg)" :
-                                   service.id === "backup" ? "url(http://bullguard.com/marketingfiles/ext/umbracoLanding/demo/images/featureslist/backupTile.jpg)" :
-                                   service.id === "vulnerabilities" ? "url(http://bullguard.com/marketingfiles/ext/umbracoLanding/demo/images/featureslist/vulnerableTile.jpg)" :
-                                   service.id === "spamfilter" ? "url(http://bullguard.com/marketingfiles/ext/umbracoLanding/demo/images/featureslist/spamfilterTile.jpg)" :
-                                   service.id === "smp" ? "url(http://bullguard.com/marketingfiles/ext/umbracoLanding/demo/images/featureslist/smpTile.jpg)" :
-                                   service.id === "tuneup" ? "url(http://bullguard.com/marketingfiles/ext/umbracoLanding/demo/images/featureslist/tuneupTile.jpg)" :
-                                   service.id === "idp" ? "url(http://bullguard.com/marketingfiles/ext/umbracoLanding/demo/images/featureslist/idpTile.jpg)" :
-                                   "url(http://bullguard.com/marketingfiles/ext/umbracoLanding/demo/images/featureslist/parentalTile.jpg)",
+                      backgroundImage: `linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.6) 100%)`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                       backgroundRepeat: "no-repeat",
