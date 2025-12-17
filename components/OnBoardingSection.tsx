@@ -103,7 +103,7 @@ export function OnBoardingSection() {
     <div
       ref={overlayRef}
       id="onboarding-section"
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-gradient-to-br from-[#ef552c] via-[#161f2a] to-[#18212d]"
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-gradient-to-br from-[#ef552c] via-[#161f2a] to-[#18212d] px-4"
       style={{
         backgroundAttachment: "fixed",
       }}
@@ -118,6 +118,7 @@ export function OnBoardingSection() {
           alt="Wsip logo"
           width={400}
           height={120}
+          className="w-[250px] h-auto sm:w-[300px] md:w-[350px] lg:w-[400px]"
           priority
         />
       </div>
