@@ -3,6 +3,8 @@
 import { LogoMarquee } from "@/components/LogoMarquee";
 import { OurServicesSection } from "@/components/OurServicesSection";
 import { SculptureFlowSection } from "@/components/SculptureFlowSection";
+import { ContactUsFooter } from "./ContactUsFooter";
+import { FeaturedSection } from "./FeaturedSection";
 
 // Layout tokens for consistent spacing across sections
 const SECTION_WRAPPER = "w-full px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16";
@@ -51,7 +53,9 @@ export default function HeroSections() {
           </div>
         </div>
       </section>
-
+      <FeaturedSection/>
+      
+      <ContactUsFooter />
     </>
   );
 }

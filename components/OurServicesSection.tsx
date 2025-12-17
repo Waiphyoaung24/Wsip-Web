@@ -135,39 +135,40 @@ export function OurServicesSection() {
   }, []);
 
   return (
-    <section className="">
+    <section className="w-full overflow-hidden">
       <div className="relative w-full h-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         {/* Title */}
-       
-
-       
-        <h1 ref={titleRef} className="text-white text-center text-2xl sm:text-3xl md:text-[38px] font-light pt-8 sm:pt-[45px] pb-0 mb-4 sm:mb-6 md:mb-8 lg:mb-10"
-        > What We Do</h1>
+        <h1 
+          ref={titleRef} 
+          className="text-white text-center text-2xl sm:text-3xl md:text-[38px] font-light pt-6 sm:pt-8 md:pt-[45px] pb-0 mb-6 sm:mb-8 md:mb-10 lg:mb-12"
+        > 
+          What We Do
+        </h1>
 
         {/* Main Content Container */}
-        <div className="relative w-full flex flex-col md:flex-row items-start min-h-[300px] md:min-h-[500px] lg:min-h-709px]">
+        <div className="relative w-full flex flex-col md:flex-row items-start min-h-[600px] sm:min-h-[700px] md:min-h-[800px] lg:min-h-[900px] pb-8 sm:pb-12 md:pb-16">
           {/* Feature Content - Left Side */}
           <div
-            className="relative w-full md:w-[35%] lg:w-[30%] min-h-[300px] sm:min-h-[400px] mt-8 sm:mt-12 md:mt-0 md:left-0 px-4 sm:px-6 md:px-0"
+            className="relative w-full md:w-[35%] lg:w-[30%] min-h-[250px] sm:min-h-[300px] md:min-h-[400px] mt-4 sm:mt-6 md:mt-0 px-4 sm:px-6 md:px-0 md:absolute md:left-0"
             style={{
-              top: "clamp(250px, 10vh, 142px)",
-              marginLeft: "clamp(200px, 5vw, 80px)",
+              top: "clamp(100px, 10vh, 142px)",
+              marginLeft: "clamp(0px, 5vw, 80px)",
             }}
           >
             {/* Default visible content when no tile is active */}
             {!activeService && (
-              <div className="feature-content absolute inset-0 z-10">
-                <div className="text-white space-y-4 sm:space-y-5 md:space-y-6">
+              <div className="feature-content w-full md:absolute md:inset-0 z-10">
+                <div className="text-white space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6">
                   <div>
-                    <h2 className="text-2xl sm:text-3xl md:text-[37px] lg:text-[42px] font-light mb-3 sm:mb-4 tracking-[0.02em]">
+                    <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-[37px] xl:text-[42px] font-light mb-2 sm:mb-3 md:mb-4 tracking-[0.02em]">
                       Overall
                     </h2>
-                    <div className="mb-4 sm:mb-5 md:mb-6">
+                    <div className="mb-3 sm:mb-4 md:mb-5 lg:mb-6">
                       <span className="block w-full border-t border-white/30 h-[1px]" />
                     </div>
                   </div>
-                  <div className="space-y-4 sm:space-y-5 md:space-y-6 mt-2">
-                    <p className="text-sm sm:text-base md:text-[16px] lg:text-[17px] text-white/90 leading-relaxed sm:leading-[1.85] md:leading-[1.9] font-light">
+                  <div className="space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6">
+                    <p className="text-sm sm:text-[15px] md:text-[16px] lg:text-[17px] text-white/90 leading-relaxed sm:leading-[1.75] md:leading-[1.85] lg:leading-[1.9] font-light">
                       Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                       Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                       when an unknown printer took a galley of type and scrambled it to make a type
@@ -183,23 +184,23 @@ export function OurServicesSection() {
             {services.map((service) => (
               <div
                 key={service.id}
-                className={`feature-content absolute inset-0 transition-opacity duration-100 ${
+                className={`feature-content w-full md:absolute md:inset-0 transition-opacity duration-100 ${
                   activeService === service.id ? "opacity-100 z-20" : "opacity-0 z-0 pointer-events-none"
                 }`}
               >
-                <div className="text-white space-y-4 sm:space-y-5 md:space-y-6">
+                <div className="text-white space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6">
                   <div>
-                    <h2 className="text-2xl sm:text-3xl md:text-[37px] lg:text-[42px] font-light mb-3 sm:mb-4 tracking-[0.02em]">
+                    <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-[37px] xl:text-[42px] font-light mb-2 sm:mb-3 md:mb-4 tracking-[0.02em]">
                       {service.title}
                     </h2>
-                    <div className="mb-4 sm:mb-5 md:mb-6">
+                    <div className="mb-3 sm:mb-4 md:mb-5 lg:mb-6">
                       <span className="block w-full border-t border-white/30 h-[1px]" />
                     </div>
                   </div>
 
-                  <div className="space-y-4 sm:space-y-5 md:space-y-6 mt-2">
+                  <div className="space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6">
                     <div className="prose prose-invert max-w-none">
-                      <p className="text-sm sm:text-base md:text-[16px] lg:text-[17px] text-white/90 leading-relaxed sm:leading-[1.85] md:leading-[1.9] font-light">
+                      <p className="text-sm sm:text-[15px] md:text-[16px] lg:text-[17px] text-white/90 leading-relaxed sm:leading-[1.75] md:leading-[1.85] lg:leading-[1.9] font-light">
                         {service.description.split("\n\n").map((paragraph, idx) => (
                           <span key={idx}>
                             {paragraph}
@@ -216,7 +217,7 @@ export function OurServicesSection() {
 
                     {service.expandedContent && (
                       <div className="prose prose-invert max-w-none pt-2 sm:pt-3 md:pt-4 border-t border-white/10">
-                        <p className="text-sm sm:text-base md:text-[16px] lg:text-[17px] text-white/85 leading-relaxed sm:leading-[1.85] md:leading-[1.9] font-light">
+                        <p className="text-sm sm:text-[15px] md:text-[16px] lg:text-[17px] text-white/85 leading-relaxed sm:leading-[1.75] md:leading-[1.85] lg:leading-[1.9] font-light">
                           {service.expandedContent.split("\n\n").map((paragraph, idx) => (
                             <span key={idx}>
                               {paragraph}
@@ -237,32 +238,24 @@ export function OurServicesSection() {
             ))}
           </div>
 
-          {/* Tiles Container - Right Side */}
-         
-         
+          {/* Tiles Container - Right Side (Desktop) */}
           <div
-            className="absolute right-0 hidden md:block"
+            className="absolute right-0 hidden md:block overflow-visible"
             style={{
-              width: "clamp(500px, 50vw, 700px)",
-              height: "clamp(500px, 50vw, 700px)",
-              right: "clamp(40px, 5vw, 80px)",
-              top: "clamp(100px, 10vh, 142px)",
+              width: "clamp(400px, 50vw, 700px)",
+              height: "clamp(400px, 50vw, 700px)",
+              right: "clamp(20px, 5vw, 80px)",
+              top: "clamp(80px, 10vh, 142px)",
               zIndex: 3,
             }}
             onMouseLeave={() => setActiveService(null)}
           >
-             <h1 className="text-white font-sans leading-[1.4] max-w-[45rem] text-center text-base sm:text-lg md:text-lg lg:text-lg mb-4 sm:mb-6" style={{ wordSpacing: '1px', textShadow: '0px 1px 0px rgba(255, 255, 255, 0.1)' }}>
-              Hover to see our services below, <br></br>if you want to see more, click{' '}
-              <a href="/service" className="highlight-text inline-block text-white no-underline transition-all duration-[250ms] relative z-0 cursor-pointer" style={{ textShadow: '0px 1px 0px rgba(255, 255, 255, 0.1)' }}>
-                <span>here</span>
-              </a>
-            </h1>
             <div 
               className="grid grid-cols-3 h-full w-full items-center justify-items-center"
               style={{
-                gap: "clamp(20px, 2.5vw, 32px)",
+                gap: "clamp(16px, 2vw, 32px)",
                 perspective: "1000px",
-                padding: "clamp(12px, 1.5vw, 24px)",
+                padding: "clamp(8px, 1.5vw, 24px)",
                 alignContent: "center",
                 justifyContent: "center",
               }}
@@ -272,7 +265,7 @@ export function OurServicesSection() {
                   key={service.id}
                   className={`service-tile relative cursor-pointer transition-all duration-300 ease-out w-full h-full ${
                     activeService === service.id
-                      ? "scale-[1.8] z-20 -translate-x-[70px]"
+                      ? "scale-[1.6] md:scale-[1.7] lg:scale-[1.8] z-20 -translate-x-[50px] md:-translate-x-[60px] lg:-translate-x-[70px]"
                       : activeService && activeService !== service.id
                       ? "scale-95 opacity-70"
                       : "scale-100 z-10"
@@ -300,19 +293,19 @@ export function OurServicesSection() {
           </div>
 
           {/* Mobile Tiles Grid */}
-          <div className="md:hidden w-full mt-8 mb-4 sm:mb-16 px-4">
-            <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-5 max-w-lg mx-auto">
+          <div className="md:hidden w-full mt-6 sm:mt-8 mb-8 sm:mb-12 px-2 sm:px-4">
+            <div className="grid grid-cols-3 gap-2.5 sm:gap-3 md:gap-4 max-w-md sm:max-w-lg mx-auto">
               {services.map((service) => (
                 <div
                   key={service.id}
                   className={`service-tile relative cursor-pointer transition-all duration-200 aspect-square ${
-                    activeService === service.id ? "scale-110 z-20" : "scale-100 z-10"
+                    activeService === service.id ? "scale-105 sm:scale-110 z-20" : "scale-100 z-10"
                   }`}
                   onMouseEnter={() => setActiveService(service.id)}
                   onTouchStart={() => setActiveService(activeService === service.id ? null : service.id)}
                   onClick={() => setActiveService(activeService === service.id ? null : service.id)}
                   style={{
-                    boxShadow: "rgba(0, 0, 0, 0.23) 19px 19px 30px",
+                    boxShadow: "rgba(0, 0, 0, 0.23) 12px 12px 20px",
                   }}
                 >
                   <div
@@ -331,8 +324,6 @@ export function OurServicesSection() {
             </div>
           </div>
         </div>
-
-       
       </div>
     </section>
   );
