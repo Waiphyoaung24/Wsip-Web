@@ -727,8 +727,6 @@ canvas {
   position: absolute;
   width: 140px;
   height: 140px;
-  border: 2px dashed rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -760,4 +758,64 @@ canvas {
   align-items: center;
   position: relative;
   z-index: 10;
+}
+
+/* Vision Text Animation Styles */
+.vision-text {
+  will-change: opacity;
+}
+
+/* Vision Card Styles */
+.vision-card {
+  opacity: 0;
+  will-change: opacity, transform;
+  z-index: 25;
+  height: auto;
+  min-height: fit-content;
+}
+
+.vision-title {
+  font-family: "Alwyn", sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.vision-description {
+  font-family: "Alwyn", sans-serif;
+  line-height: 1.6;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments for vision cards */
+@media screen and (max-width: 1024px) {
+  .vision-card {
+    max-width: 280px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .vision-card {
+    max-width: 240px;
+    left: 140px !important;
+    right: 140px !important;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .vision-card {
+    max-width: 200px;
+    left: 120px !important;
+    right: 120px !important;
+  }
+
+  .vision-title {
+    font-size: 1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .vision-description {
+    font-size: 0.75rem !important;
+  }
 }
