@@ -57,11 +57,10 @@ html {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  /* Gradient background colors */
+  /* Gradient background colors - same as body and footer */
   background: linear-gradient(-45deg, #ef552c, #161f2a, #18212d, #f37d5c);
   background-size: 400% 400%;
-  background: #161f2a;
-  animation: gradient 15s ease infinite;
+  animation: gradient 5s ease infinite;
   background-attachment: fixed;
   font-family: "Alwyn", sans-serif;
 }
@@ -855,15 +854,14 @@ canvas {
 
 /* Contact Us Footer Styles */
 .footer-section {
-  background: var(--background);
-  position: relative;
-  font-family: "Alwyn", sans-serif;
-  color: var(--foreground);
-  /* Use gradient background similar to body */
-  background: linear-gradient(-45deg, #ef552c, #161f2a, #18212d, #f37d5c);
+  /* Same gradient background as body for seamless transition */
+  background: #0a0a0a;
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
   background-attachment: fixed;
+  position: relative;
+  font-family: "Alwyn", sans-serif;
+  color: var(--foreground);
 }
 
 .footer-section .container {
@@ -874,7 +872,7 @@ canvas {
 
 .footer-cta {
   border-bottom: 1px solid rgba(224, 224, 224, 0.1);
-  padding: 3rem 0;
+  padding: 4rem 0 3rem;
 }
 
 .footer-cta-grid {
@@ -912,17 +910,19 @@ canvas {
 .footer-content {
   position: relative;
   z-index: 2;
-  padding: 3rem 0;
+  padding: 4rem 0 3rem;
 }
 
 .footer-content-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .footer-widget {
-  margin-bottom: 2rem;
+  width: 100%;
 }
 
 .footer-logo {
@@ -1073,22 +1073,19 @@ canvas {
 
 .copyright-area {
   background: rgba(10, 10, 10, 0.8);
-  padding: 1.5625rem 0;
+  padding: 2rem 0;
   border-top: 1px solid rgba(224, 224, 224, 0.1);
+  margin-top: 2rem;
 }
 
 .copyright-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
 }
 
 .copyright-text {
   text-align: center;
-  flex: 1;
-  min-width: 200px;
 }
 
 .copyright-text p {
@@ -1136,37 +1133,29 @@ canvas {
 
 @media (max-width: 768px) {
   .footer-cta {
-    padding: 2rem 0;
+    padding: 3rem 0 2rem;
   }
 
   .footer-cta-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .footer-content {
-    padding: 2rem 0;
-  }
-
-  .footer-content-grid {
-    grid-template-columns: 1fr;
     gap: 2rem;
   }
 
-  .footer-links-list {
-    grid-template-columns: 1fr;
+  .footer-content {
+    padding: 3rem 0 2rem;
+  }
+
+  .footer-content-grid {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+
+  .copyright-area {
+    padding: 1.5rem 0;
+    margin-top: 1.5rem;
   }
 
   .copyright-content {
-    flex-direction: column;
     text-align: center;
-  }
-
-  .footer-menu {
-    width: 100%;
-  }
-
-  .footer-menu ul {
-    justify-content: center;
   }
 }

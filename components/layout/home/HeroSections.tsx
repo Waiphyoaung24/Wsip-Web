@@ -1,8 +1,8 @@
 "use client";
 
-import { LogoMarquee } from "@/components/LogoMarquee";
-import { OurServicesSection } from "@/components/OurServicesSection";
-import { SculptureFlowSection } from "@/components/SculptureFlowSection";
+import { LogoMarquee } from "@/components/layout/home/LogoMarquee";
+import { OurServicesSection } from "@/components/layout/home/OurServicesSection";
+import { SculptureFlowSection } from "@/components/layout/home/SculptureFlowSection";
 import { ContactUsFooter } from "./ContactUsFooter";
 import { FeaturedSection } from "./FeaturedSection";
 
@@ -54,7 +54,7 @@ export default function HeroSections() {
         </div>
       </section>
       <FeaturedSection/>
-      
+     
       <ContactUsFooter />
     </>
   );

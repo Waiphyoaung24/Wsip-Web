@@ -1,5 +1,5 @@
-import { CursorCanvas } from "@/components/CursorCanvas";
-import { ScrollSmootherProvider } from "@/components/ScrollSmootherProvider";
+import { CursorCanvas } from "@/components/layout/home/CursorCanvas";
+import { ScrollSmootherProvider } from "@/components/layout/home/ScrollSmootherProvider";
 import type { Metadata } from "next";
 import "./globals.css";
 import { SsgoiProvider } from "./ssgoi-provider";

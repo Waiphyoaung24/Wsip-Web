@@ -19,34 +19,35 @@ interface PanelData {
 const panelsData: PanelData[] = [
   {
     id: 1,
-    title: "Section 1",
+    title: "Featured Products (Design) - 1",
     imageUrl: "https://assets.codepen.io/16327/demo1.png",
     imageAlt: "Demo 1",
   },
   {
     id: 2,
-    title: "Section 2",
+    title: "Featured Products (Design) - 2",
     imageUrl: "https://assets.codepen.io/16327/demo2.png",
     imageAlt: "Demo 2",
   },
   {
     id: 3,
-    title: "Section 3",
+    title: "Featured Products (Design) - 3",
     imageUrl: "https://assets.codepen.io/16327/demo3.png",
     imageAlt: "Demo 3",
   },
   {
     id: 4,
-    title: "Section 4",
+    title: "Featured Products (Technology) - 1",
     imageUrl: "https://assets.codepen.io/16327/demo4.png",
     imageAlt: "Demo 4",
   },
   {
-    id: 5,
-    title: "Section 5",
-    imageUrl: "https://assets.codepen.io/16327/demo5.png",
-    imageAlt: "Demo 5",
+      id: 5,
+      title: "Featured Products (Technology) - 2",
+      imageUrl: "https://assets.codepen.io/16327/demo5.png",
+      imageAlt: "Demo 5",
   },
+ 
 ];
 
 export function FeaturedSection() {
@@ -118,7 +119,7 @@ export function FeaturedSection() {
       {panelsData.map((panel) => (
         <section key={panel.id} className="featured-panel">
           <div className="featured-panel-content">
-            <h1>{panel.title}</h1>
+            <h3>{panel.title}</h3>
             <img src={panel.imageUrl} alt={panel.imageAlt} />
           </div>
         </section>

@@ -24,35 +24,35 @@ export function MainNav() {
         aria-label="Toggle menu"
       >
         <span
-          className={`block w-6 h-0.5 bg-white transition-all duration-300 ${
+          className={`block w-6 h-0.5 bg-white/90 transition-all duration-300 ${
             isOpen ? "rotate-45 translate-y-2" : ""
           }`}
         />
         <span
-          className={`block w-6 h-0.5 bg-white transition-all duration-300 ${
+          className={`block w-6 h-0.5 bg-white/90 transition-all duration-300 ${
             isOpen ? "opacity-0" : ""
           }`}
         />
         <span
-          className={`block w-6 h-0.5 bg-white transition-all duration-300 ${
+          className={`block w-6 h-0.5 bg-white/90 transition-all duration-300 ${
             isOpen ? "-rotate-45 -translate-y-2" : ""
           }`}
         />
       </button>
 
       {/* Desktop Navigation */}
-      <nav className="hidden md:flex gap-4 lg:gap-6 text-sm font-medium">
+      <nav className="hidden md:flex gap-6 lg:gap-8">
         {links.map((link) => {
           const isActive = pathname === link.href;
           return (
             <Link
               key={link.href}
               href={link.href}
-              className={
+              className={`text-sm font-light tracking-wide transition-opacity duration-200 ${
                 isActive
-                  ? "text-zinc-900 dark:text-zinc-50"
-                  : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50 transition-colors"
-              }
+                  ? "text-white/100"
+                  : "text-white/70 hover:text-white/100"
+              }`}
             >
               {link.label}
             </Link>
@@ -64,10 +64,10 @@ export function MainNav() {
       {isOpen && (
         <>
           <div
-            className="fixed inset-0 bg-black/50 z-40 md:hidden"
+            className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 md:hidden"
             onClick={() => setIsOpen(false)}
           />
-          <nav className="fixed top-0 right-0 h-full w-64 bg-zinc-900 dark:bg-zinc-950 z-50 md:hidden flex flex-col gap-4 p-6 pt-20 shadow-xl">
+          <nav className="fixed top-0 right-0 h-full w-64 bg-black/80 backdrop-blur-md z-50 md:hidden flex flex-col gap-2 p-6 pt-20">
             {links.map((link) => {
               const isActive = pathname === link.href;
               return (
@@ -75,11 +75,11 @@ export function MainNav() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className={
+                  className={`text-base font-light tracking-wide py-3 px-2 transition-opacity duration-200 ${
                     isActive
-                      ? "text-white text-lg font-medium py-2 border-b border-white/20"
-                      : "text-zinc-400 hover:text-white text-lg py-2 border-b border-zinc-800 transition-colors"
-                  }
+                      ? "text-white/100"
+                      : "text-white/70 hover:text-white/100"
+                  }`}
                 >
                   {link.label}
                 </Link>
