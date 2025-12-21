@@ -3,6 +3,7 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 // Register GSAP plugins
 if (typeof window !== "undefined") {
@@ -11,321 +12,246 @@ if (typeof window !== "undefined") {
 
 interface Service {
   id: string;
-  name: string;
+  number: string;
   title: string;
+  image: string;
+  imageAlt: string;
   description: string;
-  expandedContent?: string;
-  icon?: string;
+  tags: string[];
 }
 
 const services: Service[] = [
   {
     id: "branding",
-    name: "Branding",
+    number: "01",
     title: "Branding",
-    description:
-      "We craft compelling brand identities that resonate with your audience and differentiate you in the market. Our strategic approach combines market research, creative vision, and storytelling to build brands that leave lasting impressions.\n\nFrom logo design to brand guidelines, we create cohesive visual systems that communicate your values and connect with customers on an emotional level.",
-    },
+    image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=1200&auto=format&fit=crop",
+    imageAlt: "Branding",
+    description: "We craft compelling brand identities that resonate with your audience and differentiate you in the market. Our strategic approach combines market research, creative vision, and storytelling to build brands that leave lasting impressions.",
+    tags: ["Identity", "Strategy", "Guidelines"],
+  },
   {
     id: "design",
-    name: "Design",
+    number: "02",
     title: "Design",
-    description:
-      "We transform ideas into visually stunning designs that captivate and engage. Our design team specializes in creating beautiful, functional, and user-centered solutions across print and digital mediums.\n\nWhether it's graphic design, UI/UX design, or creative direction, we bring creativity and strategic thinking to every project.",
-   },
+    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1200&auto=format&fit=crop",
+    imageAlt: "Design",
+    description: "We transform ideas into visually stunning designs that captivate and engage. Our design team specializes in creating beautiful, functional, and user-centered solutions across print and digital mediums.",
+    tags: ["Graphic", "UI/UX", "Visual"],
+  },
   {
     id: "webdev",
-    name: "Web Development",
+    number: "03",
     title: "Web Development",
-    description:
-      "We build modern, responsive websites and web applications that combine beautiful design with powerful functionality. Our development team creates fast, secure, and scalable solutions using cutting-edge technologies.\n\nFrom simple landing pages to complex web applications, we deliver digital experiences that drive results and exceed expectations.",
-    },
-  {
-    id: "tech",
-    name: "IT Solutions",
-    title: "IT Solutions",
-    description:
-      "We provide comprehensive IT technology solutions to help your business operate efficiently and scale effectively. Our technical expertise spans infrastructure, cloud services, automation, and system integration.\n\nWe help businesses leverage technology to streamline operations, improve productivity, and achieve their digital transformation goals.",
-   },
-  {
-    id: "strategy",
-    name: "Brand Strategy",
-    title: "Brand Strategy",
-    description:
-      "We develop strategic brand positioning and marketing strategies that drive growth and build meaningful connections with your audience. Our data-driven approach ensures your brand strategy aligns with business objectives.\n\nThrough research, analysis, and creative thinking, we craft strategies that differentiate your brand and guide all marketing and communication efforts.",
-   },
-  {
-    id: "digital",
-    name: "Digital Design",
-    title: "Digital Design",
-    description:
-      "We create engaging digital experiences across websites, mobile apps, and digital platforms. Our digital design team combines aesthetic excellence with user experience best practices to create interfaces that users love.\n\nFrom wireframes to pixel-perfect designs, we ensure every digital touchpoint reflects your brand and serves your users effectively.",
-    },
-  {
-    id: "content",
-    name: "Content Creation",
-    title: "Content Creation",
-    description:
-      "We produce compelling content that tells your brand story and engages your audience. From copywriting to visual content, we create materials that resonate and drive action.\n\nOur content creation services span written content, visual assets, video production, and social media content that aligns with your brand voice and marketing goals.",
-   },
-  {
-    id: "consulting",
-    name: "Creative Consulting",
-    title: "Creative Consulting",
-    description:
-      "We provide strategic creative consulting to help businesses make informed decisions about their brand, design, and digital presence. Our consultants bring years of experience and industry insights to guide your creative projects.\n\nFrom brand audits to creative direction, we help you navigate complex creative challenges and make decisions that align with your business goals.",
-    },
+    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=1200&auto=format&fit=crop",
+    imageAlt: "Web Development",
+    description: "We build modern, responsive websites and web applications that combine beautiful design with powerful functionality. Our development team creates fast, secure, and scalable solutions using cutting-edge technologies.",
+    tags: ["Frontend", "Backend", "Full Stack"],
+  },
   {
     id: "innovation",
-    name: "Innovation Lab",
-    title: "Innovation Lab",
-    description:
-      "We explore emerging technologies and creative possibilities to help businesses stay ahead of the curve. Our innovation lab experiments with new tools, techniques, and approaches to solve creative and technical challenges.\n\nFrom AI-powered design tools to immersive experiences, we help businesses explore what's next and identify opportunities for innovation in their brand and digital presence.",
-   },
+    number: "04",
+    title: "Innovation",
+    image: "https://images.unsplash.com/photo-1555255707-c07966088b7b?q=80&w=1200&auto=format&fit=crop",
+    imageAlt: "Innovation",
+    description: "We explore emerging technologies and creative possibilities to help businesses stay ahead of the curve. Our innovation lab experiments with new tools, techniques, and approaches to solve creative and technical challenges.",
+    tags: ["Technology", "Digital", "Future"],
+  },
 ];
 
 export function OurServicesSection() {
-  const [activeService, setActiveService] = useState<string | null>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const [activeService, setActiveService] = useState<string>("innovation");
+  const [expandedMobile, setExpandedMobile] = useState<string>("innovation");
   const titleRef = useRef<HTMLHeadingElement>(null);
 
-  useEffect(() => {
-    // Animate title (from offset/transparent to visible), but keep it visible by default
-    if (titleRef.current) {
-      gsap.fromTo(
-        titleRef.current,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          scrollTrigger: {
-            trigger: titleRef.current,
-            start: "top 85%",
-            end: "bottom 20%",
-            scrub: true,
-          },
-        }
-      );
-    }
+  const toggleMobile = (id: string) => {
+    setExpandedMobile(expandedMobile === id ? "" : id);
+  };
 
-    // Animate subtitle with a slight delay, but keep it visible by default
-    if (subtitleRef.current) {
-      gsap.fromTo(
-        subtitleRef.current,
-        { opacity: 0, y: 30 },
-        {
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!titleRef.current) return;
+    if (!gsap || !ScrollTrigger) return;
+
+    // Animate "What we do" title - simple fade in
+    let textAnimation: gsap.core.Tween | null = null;
+    let textScrollTrigger: ScrollTrigger | null = null;
+
+    const text = titleRef.current;
+
+    // Set initial state
+    gsap.set(text, { opacity: 0 });
+
+    // Simple fade in with ScrollTrigger
+    textScrollTrigger = ScrollTrigger.create({
+      trigger: text,
+      start: "top 80%",
+      onEnter: () => {
+        textAnimation = gsap.to(text, {
           opacity: 1,
-          y: 0,
-          duration: 1,
-          delay: 0.2,
-          scrollTrigger: {
-            trigger: subtitleRef.current,
-            start: "top 85%",
-            end: "bottom 20%",
-            scrub: true,
-          },
+          duration: 0.8,
+          ease: "power2.out",
+        });
+      },
+      onLeaveBack: () => {
+        if (textAnimation) {
+          textAnimation.reverse();
         }
-      );
-    }
+      },
+    });
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      if (textAnimation) {
+        textAnimation.kill();
+      }
+      if (textScrollTrigger) {
+        textScrollTrigger.kill();
+      }
     };
   }, []);
 
   return (
-    <section className="w-full overflow-hidden">
-      <div className="relative w-full h-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-        {/* Title */}
-        <h1 
-          ref={titleRef} 
-          className="text-white text-center text-2xl sm:text-3xl md:text-[38px] font-light pt-6 sm:pt-8 md:pt-[45px] pb-0 mb-6 sm:mb-8 md:mb-10 lg:mb-12"
-        > 
-          What We Do
+    <div className="flex flex-col items-center justify-center gap-10 md:gap-30">
+       {/* Title */}
+       <h1
+          ref={titleRef}
+          className="text-white text-center text-2xl sm:text-3xl md:text-[38px] font-light pt-8 sm:pt-[45px] pb-0 mb-4 sm:mb-6 md:mb-8 lg:mb-10"
+          style={{
+            fontFamily: "Alwyn, sans-serif",
+            letterSpacing: "0.05em",
+          }}
+        >
+          What we do
         </h1>
+    <div>
+     
+        {/* Main Content */}
+        <div className="flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-20 xl:gap-14 pl-4 md:pl-8 lg:pl-12 xl:pl-16">
+          {/* Desktop Image Panel */}
+          <div className="hidden md:block md:w-200 relative md:px-4 lg:px-6 xl:px-18">
+            <div className="sticky top-24 md:top-32 lg:top-40 h-[65vh] md:h-[40vh] w-full rounded-lg overflow-hidden bg-black/20">
+              {services.map((service) => (
+                <div
+                  key={service.id}
+                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                    activeService === service.id ? "opacity-100 z-10" : "opacity-0 z-0"
+                  }`}
+                >
+                  <Image
+                    src={service.image}
+                    alt={service.imageAlt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 40vw"
+                  />
+                  <div className="absolute bottom-0 left-0 w-full p-6 md:p-8 lg:p-10 bg-gradient-to-t from-black/80 to-transparent text-[#F2F0E9]">
+                    <div className="flex gap-2 mb-3 flex-wrap">
+                      {service.tags.map((tag, idx) => (
+                        <span
+                          key={idx}
+                          className="text-[10px] uppercase tracking-widest border border-[#F2F0E9]/30 px-2.5 py-1 rounded-full backdrop-blur-sm"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <p className="font-serif italic text-base md:text-lg lg:text-xl opacity-90 leading-relaxed">{service.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
 
-        {/* Main Content Container */}
-        <div className="relative w-full flex flex-col md:flex-row items-start min-h-[600px] sm:min-h-[700px] md:min-h-[800px] lg:min-h-[900px] pb-8 sm:pb-12 md:pb-16">
-          {/* Feature Content - Left Side */}
-          <div
-            className="relative w-full md:w-[35%] lg:w-[30%] min-h-[250px] sm:min-h-[300px] md:min-h-[400px] mt-4 sm:mt-6 md:mt-0 px-4 sm:px-6 md:px-0 md:absolute md:left-0"
-            style={{
-              top: "clamp(100px, 10vh, 142px)",
-              marginLeft: "clamp(0px, 5vw, 80px)",
-            }}
-          >
-            {/* Default visible content when no tile is active */}
-            {!activeService && (
-              <div className="feature-content w-full md:absolute md:inset-0 z-10">
-                <div className="text-white space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6">
-                  <div>
-                    <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-[37px] xl:text-[42px] font-light mb-2 sm:mb-3 md:mb-4 tracking-[0.02em]">
-                      Overall
-                    </h2>
-                    <div className="mb-3 sm:mb-4 md:mb-5 lg:mb-6">
-                      <span className="block w-full border-t border-white/30 h-[1px]" />
+          {/* Services List */}
+          <div className="w-full md:w-7/12 flex flex-col">
+            {services.map((service) => {
+              const isActive = activeService === service.id;
+              const isExpandedMobile = expandedMobile === service.id;
+
+              return (
+                <div
+                  key={service.id}
+                  className="group flex flex-col border-b border-white/20 last:border-none cursor-pointer"
+                  onMouseEnter={() => setActiveService(service.id)}
+                  onClick={() => toggleMobile(service.id)}
+                >
+                  {/* Service Header */}
+                  <div className="relative py-6 md:py-10 lg:py-12 flex items-baseline justify-between hover-trigger transition-all duration-500">
+                    <div className="flex items-baseline gap-4 md:gap-8 lg:gap-12 transition-transform duration-500 group-hover:translate-x-3 md:group-hover:translate-x-4">
+                      <span
+                        className={`font-mono text-xs md:text-sm lg:text-base transition-colors duration-300 ${
+                          isActive ? "text-white" : "text-white/40"
+                        }`}
+                      >
+                        {service.number}
+                      </span>
+                      <h3
+                        className={`font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl transition-colors duration-300 leading-tight ${
+                          isActive ? "text-white" : "text-white/60"
+                        }`}
+                      >
+                        {service.title}
+                      </h3>
+                    </div>
+                    <div
+                      className={`transform transition-transform duration-500 flex-shrink-0 ${
+                        isActive ? "rotate-0 opacity-100" : "-rotate-45 opacity-0 group-hover:opacity-50"
+                      }`}
+                    >
+                      <svg
+                        className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="1.5"
+                          d="M17 8l4 4m0 0l-4 4m4-4H3"
+                        />
+                      </svg>
                     </div>
                   </div>
-                  <div className="space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6">
-                    <p className="text-sm sm:text-[15px] md:text-[16px] lg:text-[17px] text-white/90 leading-relaxed sm:leading-[1.75] md:leading-[1.85] lg:leading-[1.9] font-light">
-                      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                      when an unknown printer took a galley of type and scrambled it to make a type
-                      specimen book. It has survived not only five centuries, but also the leap into
-                      electronic typesetting, remaining essentially unchanged.
+
+                  {/* Mobile Expandable Content */}
+                  <div
+                    className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out ${
+                      isExpandedMobile
+                        ? "max-h-[600px] opacity-100 pb-6"
+                        : "max-h-0 opacity-0"
+                    }`}
+                  >
+                    <div className="relative h-56 sm:h-64 w-full rounded-lg overflow-hidden mb-5">
+                      <Image
+                        src={service.image}
+                        alt={service.imageAlt}
+                        fill
+                        className="object-cover"
+                        sizes="100vw"
+                      />
+                    </div>
+                    <p className="font-serif text-base sm:text-lg leading-relaxed text-white/80 mb-4">
+                      {service.description}
                     </p>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Animated service content when a service is active */}
-            {services.map((service) => (
-              <div
-                key={service.id}
-                className={`feature-content w-full md:absolute md:inset-0 transition-opacity duration-100 ${
-                  activeService === service.id ? "opacity-100 z-20" : "opacity-0 z-0 pointer-events-none"
-                }`}
-              >
-                <div className="text-white space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6">
-                  <div>
-                    <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-[37px] xl:text-[42px] font-light mb-2 sm:mb-3 md:mb-4 tracking-[0.02em]">
-                      {service.title}
-                    </h2>
-                    <div className="mb-3 sm:mb-4 md:mb-5 lg:mb-6">
-                      <span className="block w-full border-t border-white/30 h-[1px]" />
+                    <div className="flex flex-wrap gap-2">
+                      {service.tags.map((tag, idx) => (
+                        <span
+                          key={idx}
+                          className="text-[10px] uppercase tracking-widest border border-white/30 px-2.5 py-1 rounded-full text-white/90"
+                        >
+                          {tag}
+                        </span>
+                      ))}
                     </div>
                   </div>
-
-                  <div className="space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6">
-                    <div className="prose prose-invert max-w-none">
-                      <p className="text-sm sm:text-[15px] md:text-[16px] lg:text-[17px] text-white/90 leading-relaxed sm:leading-[1.75] md:leading-[1.85] lg:leading-[1.9] font-light">
-                        {service.description.split("\n\n").map((paragraph, idx) => (
-                          <span key={idx}>
-                            {paragraph}
-                            {idx < service.description.split("\n\n").length - 1 && (
-                              <>
-                                <br />
-                                <br />
-                              </>
-                            )}
-                          </span>
-                        ))}
-                      </p>
-                    </div>
-
-                    {service.expandedContent && (
-                      <div className="prose prose-invert max-w-none pt-2 sm:pt-3 md:pt-4 border-t border-white/10">
-                        <p className="text-sm sm:text-[15px] md:text-[16px] lg:text-[17px] text-white/85 leading-relaxed sm:leading-[1.75] md:leading-[1.85] lg:leading-[1.9] font-light">
-                          {service.expandedContent.split("\n\n").map((paragraph, idx) => (
-                            <span key={idx}>
-                              {paragraph}
-                              {idx < service.expandedContent!.split("\n\n").length - 1 && (
-                                <>
-                                  <br />
-                                  <br />
-                                </>
-                              )}
-                            </span>
-                          ))}
-                        </p>
-                      </div>
-                    )}
-                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Tiles Container - Right Side (Desktop) */}
-          <div
-            className="absolute right-0 hidden md:block overflow-visible"
-            style={{
-              width: "clamp(400px, 50vw, 700px)",
-              height: "clamp(400px, 50vw, 700px)",
-              right: "clamp(20px, 5vw, 80px)",
-              top: "clamp(80px, 10vh, 142px)",
-              zIndex: 3,
-            }}
-            onMouseLeave={() => setActiveService(null)}
-          >
-            <div 
-              className="grid grid-cols-3 h-full w-full items-center justify-items-center"
-              style={{
-                gap: "clamp(16px, 2vw, 32px)",
-                perspective: "1000px",
-                padding: "clamp(8px, 1.5vw, 24px)",
-                alignContent: "center",
-                justifyContent: "center",
-              }}
-            >
-              {services.map((service) => (
-                <div
-                  key={service.id}
-                  className={`service-tile relative cursor-pointer transition-all duration-300 ease-out w-full h-full ${
-                    activeService === service.id
-                      ? "scale-[1.6] md:scale-[1.7] lg:scale-[1.8] z-20 -translate-x-[50px] md:-translate-x-[60px] lg:-translate-x-[70px]"
-                      : activeService && activeService !== service.id
-                      ? "scale-95 opacity-70"
-                      : "scale-100 z-10"
-                  }`}
-                  onMouseEnter={() => setActiveService(service.id)}
-                  style={{
-                    aspectRatio: "1",
-                    boxShadow: "rgba(0, 0, 0, 0.23) 19px 19px 30px",
-                  }}
-                >
-                  <div
-                    className="w-full h-full bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center rounded-sm"
-                    style={{
-                      backgroundImage: `linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.6) 100%)`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                      backgroundRepeat: "no-repeat",
-                    }}
-                  >
-                    <span className="sr-only">{service.name}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Mobile Tiles Grid */}
-          <div className="md:hidden w-full mt-6 sm:mt-8 mb-8 sm:mb-12 px-2 sm:px-4">
-            <div className="grid grid-cols-3 gap-2.5 sm:gap-3 md:gap-4 max-w-md sm:max-w-lg mx-auto">
-              {services.map((service) => (
-                <div
-                  key={service.id}
-                  className={`service-tile relative cursor-pointer transition-all duration-200 aspect-square ${
-                    activeService === service.id ? "scale-105 sm:scale-110 z-20" : "scale-100 z-10"
-                  }`}
-                  onMouseEnter={() => setActiveService(service.id)}
-                  onTouchStart={() => setActiveService(activeService === service.id ? null : service.id)}
-                  onClick={() => setActiveService(activeService === service.id ? null : service.id)}
-                  style={{
-                    boxShadow: "rgba(0, 0, 0, 0.23) 12px 12px 20px",
-                  }}
-                >
-                  <div
-                    className="w-full h-full bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center rounded-lg"
-                    style={{
-                      backgroundImage: `linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.6) 100%)`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                      backgroundRepeat: "no-repeat",
-                    }}
-                  >
-                    <span className="sr-only">{service.name}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
         </div>
-      </div>
-    </section>
+     
+    </div>
+    </div>
   );
 }
-

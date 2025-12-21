@@ -84,6 +84,7 @@ body {
   position: relative;
 }
 
+
 @keyframes gradient {
   0% {
     background-position: 0% 50%;
@@ -378,34 +379,64 @@ canvas {
   }
 }
 
-@media (max-width: 640px) {
+/* Mobile: Horizontal scrolling carousel */
+@media (max-width: 767px) {
   .welcome-gallery {
     width: 100%;
-    max-width: 100%;
+    max-width: 100vw;
     height: auto;
-    padding: 1rem 0;
+    min-height: 300px;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem;
+  }
+
+  .welcome-gallery::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
   }
 
   .welcome-slider {
     display: flex;
     flex-direction: row;
     width: max-content;
-    height: 16rem;
+    min-width: max-content;
+    height: 300px;
     align-items: stretch;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .welcome-slider + .welcome-slider {
+    margin-left: 0;
   }
 
   .welcome-img-wrap {
     padding: 0.5rem;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    width: 75vw;
+    min-width: 75vw;
+    max-width: 75vw;
+    height: 100%;
   }
 
   .welcome-img-wrap img {
-    width: 70vw;
+    width: 100%;
     height: 100%;
     max-width: none;
     object-fit: cover;
+    border-radius: 0.5rem;
   }
 
-  /* Disable vertical keyframe animation on mobile; allow manual horizontal scroll */
+  /* Disable vertical keyframe animation on mobile */
   .welcome-slider-1 .welcome-img-wrap,
   .welcome-slider-2 .welcome-img-wrap {
     animation: none;
@@ -486,7 +517,7 @@ canvas {
 }
 
 .sculpture-flow-content-section {
-  margin-top: clamp(2.5rem, 6vw, 3.5rem);
+  margin-top: clamp(15rem, 6vw, 3.5rem);
   display: flex;
   justify-content: center;
   padding: 0 16px 24px;
@@ -537,8 +568,10 @@ canvas {
 
   .sculpture-flow-content-wrapper {
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
+    justify-content: center;
     gap: 2rem;
+    width: 100%;
   }
 }
 
@@ -792,7 +825,7 @@ canvas {
 
 .featured-panel {
   width: 100%;
-  min-height: calc(100vh - 64px);
+  min-height: calc(10vh - 64px);
   display: flex;
   justify-content: center;
   align-items: center;

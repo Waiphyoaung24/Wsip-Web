@@ -19,7 +19,9 @@ export default function RootLayout({
       <body className="antialiased">
         <CursorCanvas />
         <ScrollSmootherProvider>
-          <SsgoiProvider>{children}</SsgoiProvider>
+          <SsgoiProvider>
+            <main>{children}</main>
+          </SsgoiProvider>
         </ScrollSmootherProvider>
       </body>
     </html>
